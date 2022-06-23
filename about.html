@@ -19,7 +19,124 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            overflow: hidden;
+        }
+
+        /* The actual timeline (the vertical ruler) */
+        .main-timeline {
+            position: relative;
+        }
+
+        /* The actual timeline (the vertical ruler) */
+        .main-timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #939597;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        /* Container around content */
+        .timeline {
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        /* The circles on the timeline */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: #939597;
+            border: 5px solid #F5DF4D;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Place the container to the left */
+        .left {
+            padding: 0px 40px 20px 0px;
+            left: 0;
+        }
+
+        /* Place the container to the right */
+        .right {
+            padding: 0px 0px 20px 40px;
+            left: 50%;
+        }
+
+        /* Add arrows to the left container (pointing right) */
+        .left::before {
+            content: " ";
+            position: absolute;
+            top: 18px;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+
+        /* Add arrows to the right container (pointing left) */
+        .right::before {
+            content: " ";
+            position: absolute;
+            top: 18px;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        /* Fix the circle for containers on the right side */
+        .right::after {
+            left: -12px;
+        }
+
+        /* Media queries - Responsive timeline on screens less than 600px wide */
+        @media screen and (max-width: 600px) {
+
+            /* Place the timelime to the left */
+            .main-timeline::after {
+                left: 31px;
+            }
+
+            /* Full-width containers */
+            .timeline {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            /* Make sure that all arrows are pointing leftwards */
+            .timeline::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+
+            /* Make sure all circles are at the same spot */
+            .left::after,
+            .right::after {
+                left: 18px;
+            }
+
+            .left::before {
+                right: auto;
+            }
+
+            /* Make all right containers behave like the left ones */
+            .right {
+                left: 0%;
+            }
         }
     </style>
 </head>
@@ -58,30 +175,73 @@
         </div>
         <!-- Container wrapper -->
     </nav>
-    <div class="container h-75">
-        <!-- Content -->
-        <div class="section">
-            <div class="row">
-                <div class="col-xl-6">
-                    <!-- Left Section -->
-                    <img class="w-100 py-xl-5 text-right" src="./img/about-us.png" alt="Programmer Coding" />
-                </div>
-                <div class="col-xl-6">
-                    <!-- Right Section -->
-                    <div class="d-flex align-items-lg-center">
-                        <div style="padding-top: 20%">
-                            <p class="fs-1 fw-bold">
-                                LET ME INTRODUCE MYSELF
-                            </p>
-                            <p class="">
-                                I'm a web developer with a passion for creating beautiful and functional websites.
-                                I have a strong background in web development and have a passion for learning new
-                                technologies.
-                            </p>
+    <div class="container">
+        <div class="h-75">
+            <!-- Content -->
+            <div class="section">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <!-- Left Section -->
+                        <img class="w-100 py-xl-5 text-right" src="./img/about-us.png" alt="Programmer Coding" />
+                    </div>
+                    <div class="col-xl-6">
+                        <!-- Right Section -->
+                        <div class="d-flex align-items-lg-center">
+                            <div style="padding-top: 20%">
+                                <p class="fs-1 fw-bold">
+                                    LET ME INTRODUCE MYSELF
+                                </p>
+                                <p class="">
+                                    I'm a web developer with a passion for creating beautiful and functional websites.
+                                    I have a strong background in web development and have a passion for learning new
+                                    technologies.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="section">
+            <div class="fs-2 fw-bold">Education</div>
+            <section>
+                <div class="container py-5">
+                    <div class="main-timeline">
+                        <div class="timeline left">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <h3>2010</h3>
+                                    <p class="mb-0">Srisawangvong School</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline right">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <h3>2016</h3>
+                                    <p class="mb-0">Hatyaiwittayalaisomboonkulkanya School</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline left">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <h3>2019</h3>
+                                    <p class="mb-0">Hatyai Technical College</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline right">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <h3>2022</h3>
+                                    <p class="mb-0">Hatyai Technical College</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </body>
